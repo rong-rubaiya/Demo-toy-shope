@@ -140,7 +140,7 @@ export const products: Product[] = [
     description: "An interactive smart robot that teaches basic logic, loops, and obstacles routing. Controlled via companion Bluetooth app or on-device custom code cards.",
     images: [
       "https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=800&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=800&auto=format&fit=crop"
+      "https://images.unsplash.com/photo-1781729077894-7390ee2b6fed?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ],
     specs: {
       size: "15cm x 15cm x 12cm",
@@ -168,7 +168,7 @@ export const products: Product[] = [
     ageGroup: "3+ Years",
     description: "50 pieces of solid beechwood building blocks colored with water-based non-toxic paint. Encourages shape recognition and architectural coordination.",
     images: [
-      "https://images.unsplash.com/photo-1515488042361-404e9250afef?q=80&w=800&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1532330393533-443990a51d10?q=80&w=800&auto=format&fit=crop",
       "https://images.unsplash.com/photo-1581235720704-06d3acfcb36f?q=80&w=800&auto=format&fit=crop"
     ],
     specs: {
