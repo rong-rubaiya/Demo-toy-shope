@@ -62,7 +62,7 @@ export const Navbar: React.FC = () => {
 
   const navItems = [
     { name: t.nav.products, path: "/products" },
-    { name: t.nav.giftBox, path: "/#giftbox-builder" },
+    
     { name: t.nav.process, path: "/#manufacturing-process" },
     { name: t.nav.exportMap, path: "/#global-network" },
     { name: t.nav.gallery, path: "/#factory-gallery" },

@@ -12,7 +12,7 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { FactoryTimeline } from "@/components/FactoryTimeline";
 import { FactoryGallery } from "@/components/FactoryGallery";
 import { ExportMap } from "@/components/ExportMap";
-import { GiftBoxBuilder } from "@/components/GiftBoxBuilder";
+
 import { AIRecommendation } from "@/components/AIRecommendation";
 import { Testimonials } from "@/components/Testimonials";
 import { FAQ } from "@/components/FAQ";
@@ -225,7 +225,7 @@ export default function Home() {
       </section>
 
       {/* Build Your Gift Box Component */}
-      <GiftBoxBuilder />
+      
 
       {/* Subscription Box Section */}
       <section className="py-24 bg-white dark:bg-dark relative overflow-hidden border-b border-zinc-100 dark:border-zinc-850">

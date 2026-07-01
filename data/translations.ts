@@ -6,7 +6,7 @@ export const translations = {
       whyUs: "Why Choose Us",
       factory: "Factory",
       process: "Manufacturing",
-      giftBox: "Gift Box Builder",
+      
       exportMap: "Global Network",
       gallery: "Gallery",
       faq: "FAQ",
