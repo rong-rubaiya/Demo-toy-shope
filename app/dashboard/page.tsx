@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import { useApp } from "@/components/AppContext";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import {
   User as UserIcon,
   LayoutDashboard,
@@ -42,19 +42,20 @@ export default function UserDashboardPage() {
   } = useApp();
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const defaultTab = searchParams ? searchParams.get("tab") : null;
-
   const [activeTab, setActiveTab] = useState("dashboard");
   const [mounted, setMounted] = useState(false);
 
-  // Set mounted flag and initial tab
+  // Set mounted flag and initial tab from query params
   useEffect(() => {
     setMounted(true);
-    if (defaultTab) {
-      setActiveTab(defaultTab);
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const defaultTab = params.get("tab");
+      if (defaultTab) {
+        setActiveTab(defaultTab);
+      }
     }
-  }, [defaultTab]);
+  }, []);
 
   // Auth Guard
   useEffect(() => {
@@ -590,3 +591,4 @@ export default function UserDashboardPage() {
     </>
   );
 }
+
