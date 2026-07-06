@@ -39,6 +39,7 @@ export const Navbar: React.FC = () => {
 
   const pathname = usePathname();
   const router = useRouter();
+  const [hash, setHash] = useState("");
   const t = translations[language];
 
   useEffect(() => {
@@ -53,13 +54,30 @@ export const Navbar: React.FC = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const updateHash = () => setHash(window.location.hash || "");
+      updateHash();
+      window.addEventListener("hashchange", updateHash);
+      return () => window.removeEventListener("hashchange", updateHash);
+    }
+    return undefined;
+  }, []);
+
   // Close menus on path changes
   useEffect(() => {
     setMobileMenuOpen(false);
     setProfileDropdownOpen(false);
   }, [pathname]);
 
-
+  const isActiveRoute = (itemPath: string) => {
+    if (itemPath === pathname) return true;
+    if (itemPath.includes("#")) {
+      const [base, anchor] = itemPath.split("#");
+      return pathname === base && `#${anchor}` === hash;
+    }
+    return false;
+  };
 
   const navItems = [
     { name: t.nav.home, path: "/" },
@@ -98,15 +116,18 @@ export const Navbar: React.FC = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-6">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className="text-sm font-semibold text-zinc-700 dark:text-zinc-300 hover:text-primary dark:hover:text-primary transition-colors duration-200"
-                >
-                  {item.name}
-                </Link>
-              ))}
+                {navItems.map((item) => {
+                const active = isActiveRoute(item.path);
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    className={`text-sm font-semibold transition-colors duration-200 ${active ? "text-primary" : "text-zinc-700 dark:text-zinc-300 hover:text-primary dark:hover:text-primary"}`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </nav>
 
             {/* Actions */}
@@ -278,17 +299,20 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden  bg-white/95 dark:bg-dark/95 border-b border-zinc-200 dark:border-zinc-800 py-4 px-4 space-y-4">
-            <div className="flex flex-col gap-3.5">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.path}
-                  className="text-base font-bold text-zinc-800 dark:text-zinc-200 py-1"
-                >
-                  {item.name}
-                </Link>
-              ))}
+          <div className="fixed inset-x-0 top-20 z-40 md:hidden bg-white/95 dark:bg-dark/95 border-b border-zinc-200 dark:border-zinc-800 py-4 px-4 space-y-4 overflow-y-auto max-h-[calc(100vh-5rem)] shadow-2xl backdrop-blur-sm">
+            <div className="flex flex-col gap-2">
+              {navItems.map((item) => {
+                const active = isActiveRoute(item.path);
+                return (
+                  <Link
+                    key={item.name}
+                    href={item.path}
+                    className={`text-base font-semibold rounded-xl px-3 py-3 transition ${active ? "bg-primary/10 text-primary" : "text-zinc-800 dark:text-zinc-200 hover:bg-zinc-100 dark:hover:bg-zinc-950"}`}
+                  >
+                    {item.name}
+                  </Link>
+                );
+              })}
             </div>
 
             <hr className="border-zinc-200 dark:border-zinc-800" />
