@@ -34,11 +34,13 @@ export const FAQ: React.FC = () => {
             <span>Sourcing Knowledge Base</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-            {language === "en" ? "Frequently Answered Questions" : "সচরাচর জিজ্ঞাসিত প্রশ্নাবলী"}
+            {language === "en" ? "Frequently Answered Questions" : language === "zh" ? "常见问题解答" : "সচরাচর জিজ্ঞাসিত প্রশ্নাবলী"}
           </h2>
           <p className="text-sm text-zinc-550 dark:text-zinc-400 font-medium leading-relaxed">
             {language === "en"
               ? "Important sourcing and logistical details to know when starting a custom toy manufacturing sample project with Ens."
+              : language === "zh"
+              ? "与恩斯玩具合作开展定制玩具制造样品项目时需要了解的重要采购与物流细节。"
               : "এনস টয়স-এর সাথে কাস্টম খেলনা প্রজেক্ট শুরু করার পূর্বে প্রয়োজনীয় অর্ডার এবং লজিস্টিক সংক্রান্ত তথ্যাবলী।"}
           </p>
         </div>

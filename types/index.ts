@@ -102,7 +102,9 @@ export interface FAQItem {
 
 export interface ChatMessage {
   id: string;
-  sender: 'user' | 'bot';
+  sender: 'user' | 'admin' | 'bot';
+  userEmail?: string;
+  name?: string;
   text: string;
-  timestamp: Date;
+  timestamp: string | Date;
 }

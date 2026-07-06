@@ -1,12 +1,12 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { Product, InquiryItem, GiftBoxOrder, Subscription, User, Inquiry, Review } from "@/types";
+import { Product, InquiryItem, GiftBoxOrder, Subscription, User, Inquiry, Review, ChatMessage } from "@/types";
 import { products as initialProducts, subscriptionPlans as initialSubscriptions } from "@/data/mockData";
 
 interface AppContextType {
-  language: "en" | "bn";
-  setLanguage: (lang: "en" | "bn") => void;
+  language: "en" | "bn" | "zh";
+  setLanguage: (lang: "en" | "bn" | "zh") => void;
   wishlist: string[];
   toggleWishlist: (id: string) => void;
   inquiryBasket: InquiryItem[];
@@ -35,14 +35,14 @@ interface AppContextType {
   deleteProduct: (id: string) => void;
   allInquiries: Inquiry[];
   updateInquiryStatus: (id: string, status: Inquiry["status"]) => void;
-  allMessages: { id: string; name: string; email: string; message: string; date: string }[];
-  addMessage: (name: string, email: string, message: string) => void;
+  allMessages: ChatMessage[];
+  addMessage: (name: string, email: string, message: string, sender?: 'user' | 'admin') => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<"en" | "bn">("en");
+  const [language, setLanguageState] = useState<"en" | "bn" | "zh">("en");
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [inquiryBasket, setInquiryBasket] = useState<InquiryItem[]>([]);
   const [recentlyViewed, setRecentlyViewed] = useState<string[]>([]);
@@ -53,12 +53,12 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const [rewardPoints, setRewardPoints] = useState<number>(0);
   const [productsList, setProductsList] = useState<Product[]>(initialProducts);
   const [allInquiries, setAllInquiries] = useState<Inquiry[]>([]);
-  const [allMessages, setAllMessages] = useState<any[]>([]);
+  const [allMessages, setAllMessages] = useState<ChatMessage[]>([]);
 
   // Load from local storage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedLang = localStorage.getItem("ens_language") as "en" | "bn";
+      const storedLang = localStorage.getItem("ens_language") as "en" | "bn" | "zh";
       if (storedLang) setLanguageState(storedLang);
 
       const storedWishlist = localStorage.getItem("ens_wishlist");
@@ -96,12 +96,23 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
       const storedInquiries = localStorage.getItem("ens_all_inquiries");
       if (storedInquiries) setAllInquiries(JSON.parse(storedInquiries));
 
-      const storedMessages = localStorage.getItem("ens_all_messages");
-      if (storedMessages) setAllMessages(JSON.parse(storedMessages));
+      const storedMessages = localStorage.getItem("ens_chat_history") || localStorage.getItem("ens_all_messages");
+      if (storedMessages) {
+        const parsed = JSON.parse(storedMessages) as any[];
+        const normalized: ChatMessage[] = parsed.map((msg) => ({
+          id: msg.id || "MSG-" + Math.floor(100000 + Math.random() * 900000),
+          sender: msg.sender === "admin" ? "admin" : "user",
+          userEmail: msg.userEmail || msg.email || "guest@enstoys.com",
+          name: msg.name || "Guest",
+          text: msg.text || msg.message || "",
+          timestamp: msg.timestamp || msg.date || new Date().toISOString()
+        }));
+        setAllMessages(normalized);
+      }
     }
   }, []);
 
-  const setLanguage = (lang: "en" | "bn") => {
+  const setLanguage = (lang: "en" | "bn" | "zh") => {
     setLanguageState(lang);
     localStorage.setItem("ens_language", lang);
   };
@@ -287,17 +298,18 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     localStorage.setItem("ens_all_inquiries", JSON.stringify(updated));
   };
 
-  const addMessage = (name: string, email: string, message: string) => {
-    const newMsg = {
+  const addMessage = (name: string, email: string, message: string, sender: 'user' | 'admin' = 'user') => {
+    const newMsg: ChatMessage = {
       id: "MSG-" + Math.floor(100000 + Math.random() * 900000),
+      sender,
+      userEmail: email,
       name,
-      email,
-      message,
-      date: new Date().toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric" })
+      text: message,
+      timestamp: new Date().toISOString()
     };
     const updated = [newMsg, ...allMessages];
     setAllMessages(updated);
-    localStorage.setItem("ens_all_messages", JSON.stringify(updated));
+    localStorage.setItem("ens_chat_history", JSON.stringify(updated));
   };
 
   return (

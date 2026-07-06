@@ -66,10 +66,14 @@ function ProductsContent() {
           <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
             <div>
               <h1 className="text-2xl sm:text-3xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white leading-none">
-                {language === "en" ? "B2B Toy Manufacturing Catalog" : "বিটুবি খেলনা ক্যাটালগ"}
+                {language === "en" ? "B2B Toy Manufacturing Catalog" : language === "zh" ? "B2B 玩具制造目录" : "বিটুবি খেলনা ক্যাটালগ"}
               </h1>
               <p className="text-xs text-zinc-500 dark:text-zinc-400 mt-1 font-semibold">
-                Sourcing list synced with live catalog. Select products to request sample pricing and custom molds.
+                {language === "en"
+                  ? "Sourcing list synced with live catalog. Select products to request sample pricing and custom molds."
+                  : language === "zh"
+                  ? "采购清单与实时目录同步。选择产品以申请样品报价和定制模具。"
+                  : "Sourcing list synced with live catalog. Select products to request sample pricing and custom molds."}
               </p>
             </div>
             

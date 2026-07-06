@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useApp } from "@/components/AppContext";
-import { Product, Inquiry } from "@/types";
+import { Product, Inquiry, ChatMessage } from "@/types";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { useRouter } from "next/navigation";
@@ -70,6 +70,7 @@ export default function AdminDashboardPage() {
     allInquiries,
     updateInquiryStatus,
     allMessages,
+    addMessage,
     giftOrders,
     subscriptions
   } = useApp();
@@ -79,6 +80,8 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
   const [mounted, setMounted] = useState(false);
   const [adminLogged, setAdminLogged] = useState(false);
+  const [selectedConversationEmail, setSelectedConversationEmail] = useState<string | null>(null);
+  const [replyText, setReplyText] = useState("");
 
   // CRUD Dialog states
   const [showAddModal, setShowAddModal] = useState(false);
@@ -118,6 +121,41 @@ export default function AdminDashboardPage() {
     setValue: setEditFormValue,
     reset: resetEditForm
   } = useForm<Product>();
+
+  const uniqueThreads = Object.values(
+    allMessages.reduce((acc, msg) => {
+      const emailKey = msg.userEmail || "guest@enstoys.com";
+      if (!acc[emailKey]) {
+        acc[emailKey] = { email: emailKey, name: msg.name || "Guest", messages: [] as ChatMessage[] };
+      }
+      acc[emailKey].messages.push(msg);
+      return acc;
+    }, {} as Record<string, { email: string; name: string; messages: ChatMessage[] }>)
+  ).map((thread) => ({
+    ...thread,
+    messages: thread.messages.sort((a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime())
+  }));
+
+  uniqueThreads.sort(
+    (a, b) => new Date(b.messages[b.messages.length - 1].timestamp).getTime() - new Date(a.messages[a.messages.length - 1].timestamp).getTime()
+  );
+
+  const selectedThread = selectedConversationEmail
+    ? uniqueThreads.find((thread) => thread.email === selectedConversationEmail) ?? uniqueThreads[0] ?? null
+    : uniqueThreads[0] ?? null;
+
+  const handleAdminReply = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!selectedThread || !replyText.trim()) return;
+    addMessage("Admin", selectedThread.email, replyText.trim(), "admin");
+    setReplyText("");
+  };
+
+  React.useEffect(() => {
+    if (!selectedConversationEmail && uniqueThreads.length > 0) {
+      setSelectedConversationEmail(uniqueThreads[0].email);
+    }
+  }, [allMessages, selectedConversationEmail, uniqueThreads]);
 
   // Check auth
   useEffect(() => {
@@ -612,22 +650,84 @@ export default function AdminDashboardPage() {
                 {allMessages.length === 0 ? (
                   <p className="text-xs text-zinc-450 text-center py-6">No contacts/messages logged in this session.</p>
                 ) : (
-                  <div className="space-y-4">
-                    {allMessages.map((msg) => (
-                      <div
-                        key={msg.id}
-                        className="p-5 rounded-2xl border border-zinc-150/60 dark:border-zinc-850 bg-zinc-50/50 dark:bg-zinc-900/30 space-y-2 text-xs font-semibold"
-                      >
-                        <div className="flex justify-between border-b pb-2">
-                          <span className="font-poppins font-black text-sm text-zinc-950 dark:text-white">{msg.name}</span>
-                          <span className="text-[10px] text-zinc-400 font-bold">{msg.date}</span>
-                        </div>
-                        <p className="text-zinc-500 font-medium">Business Contact: <strong className="text-zinc-850 dark:text-zinc-200">{msg.email}</strong></p>
-                        <div className="bg-zinc-100 dark:bg-zinc-900 p-2.5 rounded-lg border">
-                          <p className="italic text-zinc-650 dark:text-zinc-400 leading-relaxed font-semibold">"{msg.message}"</p>
-                        </div>
+                  <div className="grid grid-cols-1 xl:grid-cols-[280px_1fr] gap-6">
+                    <div className="rounded-3xl border border-zinc-150 dark:border-zinc-850 bg-zinc-50 dark:bg-zinc-950 p-4">
+                      <h3 className="text-xs uppercase tracking-[0.2em] font-bold text-zinc-500 dark:text-zinc-400 mb-4">Conversations</h3>
+                      <div className="space-y-3">
+                        {uniqueThreads.map((thread) => {
+                          const lastMsg = thread.messages[thread.messages.length - 1];
+                          return (
+                            <button
+                              key={thread.email}
+                              onClick={() => setSelectedConversationEmail(thread.email)}
+                              className={`w-full text-left p-3 rounded-3xl transition ${
+                                selectedConversationEmail === thread.email
+                                  ? "bg-primary/10 border border-primary text-primary"
+                                  : "border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-primary"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between gap-2 mb-1">
+                                <span className="font-bold text-sm">{thread.name}</span>
+                                <span className="text-[10px] text-zinc-500">{thread.messages.length} msgs</span>
+                              </div>
+                              <p className="text-[10px] text-zinc-500 line-clamp-2">{lastMsg.text}</p>
+                            </button>
+                          );
+                        })}
                       </div>
-                    ))}
+                    </div>
+
+                    <div className="rounded-3xl border border-zinc-150 dark:border-zinc-850 bg-white dark:bg-zinc-950 p-6 flex flex-col gap-4">
+                      {selectedThread ? (
+                        <>
+                          <div className="flex flex-col gap-1">
+                            <div className="text-xs uppercase tracking-[0.3em] font-bold text-zinc-500 dark:text-zinc-400">Conversation with</div>
+                            <h3 className="text-xl font-black text-zinc-950 dark:text-white">{selectedThread.name}</h3>
+                            <p className="text-[10px] text-zinc-500">{selectedThread.email}</p>
+                          </div>
+
+                          <div className="space-y-3 max-h-[520px] overflow-y-auto pr-2">
+                            {selectedThread.messages.map((msg) => (
+                              <div
+                                key={msg.id}
+                                className={`rounded-3xl p-4 text-sm ${
+                                  msg.sender === "admin"
+                                    ? "bg-primary/10 text-zinc-900 dark:text-white self-end"
+                                    : "bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100"
+                                }`}
+                              >
+                                <div className="flex items-center justify-between mb-2 gap-3 text-[10px] uppercase tracking-[0.2em] font-bold text-zinc-500 dark:text-zinc-400">
+                                  <span>{msg.sender === "admin" ? "Admin Reply" : "Client Message"}</span>
+                                  <span>{new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}</span>
+                                </div>
+                                <p>{msg.text}</p>
+                              </div>
+                            ))}
+                          </div>
+
+                          <form onSubmit={handleAdminReply} className="space-y-3">
+                            <label className="block text-[10px] uppercase tracking-[0.2em] text-zinc-500 dark:text-zinc-400 font-bold">Reply as Admin</label>
+                            <textarea
+                              value={replyText}
+                              onChange={(e) => setReplyText(e.target.value)}
+                              rows={4}
+                              placeholder="Write your reply here..."
+                              className="w-full rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-950 px-4 py-3 text-sm text-zinc-900 dark:text-zinc-100 focus:outline-none focus:ring-2 focus:ring-primary/20"
+                            />
+                            <button
+                              type="submit"
+                              className="inline-flex items-center justify-center rounded-3xl bg-primary px-5 py-3 text-xs font-bold uppercase tracking-[0.2em] text-white transition hover:bg-primary/95"
+                            >
+                              Send Reply
+                            </button>
+                          </form>
+                        </>
+                      ) : (
+                        <div className="p-6 rounded-3xl border border-dashed border-zinc-200 dark:border-zinc-800 text-center text-sm text-zinc-500 dark:text-zinc-400">
+                          Select a conversation on the left to view messages and reply.
+                        </div>
+                      )}
+                    </div>
                   </div>
                 )}
               </div>

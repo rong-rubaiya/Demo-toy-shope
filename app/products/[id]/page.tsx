@@ -25,12 +25,11 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 
 interface PageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export default function ProductDetailPage({ params }: PageProps) {
-  const resolvedParams = React.use(params);
-  const slug = resolvedParams.id;
+  const slug = params.id;
 
   const {
     productsList,

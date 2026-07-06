@@ -18,11 +18,13 @@ export const Testimonials: React.FC = () => {
             <span>Global Client Reviews</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-            {language === "en" ? "Trusted by Global Sourcing Executives" : "বিশ্বব্যাপী সোর্সিং এক্সিকিউটিভদের বিশ্বস্ত অংশীদার"}
+            {language === "en" ? "Trusted by Global Sourcing Executives" : language === "zh" ? "深受全球采购主管信赖" : "বিশ্বব্যাপী সোর্সিং এক্সিকিউティブদের বিশ্বস্ত অংশীদার"}
           </h2>
           <p className="text-sm text-zinc-550 dark:text-zinc-400 font-medium leading-relaxed">
             {language === "en"
               ? "See how our dedication to ethical cleanroom assembly, robust quality control, and timely shipping supports global toy brands and indie designer studios."
+              : language === "zh"
+              ? "了解我们对合规无尘组装、严格质量控制和准时出货的专注如何为全球玩具品牌及独立设计师工作室提供支持。"
               : "দেখুন কিভাবে আমাদের মানসম্মত উৎপাদন ব্যবস্থা, গুণগত মান নিয়ন্ত্রণ এবং সময়মতো শিপিং বিশ্বখ্যাত খেলনা ব্র্যান্ড এবং স্বতন্ত্র শিল্পী স্টুডিওগুলিকে সহায়তা করে।"}
           </p>
         </div>

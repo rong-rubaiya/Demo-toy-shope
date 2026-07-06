@@ -35,6 +35,7 @@ export const Navbar: React.FC = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [inquiryDrawerOpen, setInquiryDrawerOpen] = useState(false);
+  const [langDropdownOpen, setLangDropdownOpen] = useState(false);
 
   const pathname = usePathname();
   const router = useRouter();
@@ -61,8 +62,9 @@ export const Navbar: React.FC = () => {
  
 
   const navItems = [
+    { name: t.nav.home, path: "/" },
     { name: t.nav.products, path: "/products" },
-    
+    { name: t.nav.chat, path: "/chat" },
     { name: t.nav.process, path: "/#manufacturing-process" },
     { name: t.nav.exportMap, path: "/#global-network" },
     { name: t.nav.gallery, path: "/#factory-gallery" },
@@ -110,7 +112,60 @@ export const Navbar: React.FC = () => {
 
             {/* Actions */}
             <div className="hidden md:flex items-center gap-4">
-              
+              {/* Language Selector Dropdown */}
+              <div className="relative">
+                <button
+                  onClick={() => setLangDropdownOpen(!langDropdownOpen)}
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-300 hover:border-primary dark:hover:border-primary hover:text-primary transition duration-200 text-xs font-semibold cursor-pointer"
+                >
+                  <Globe className="w-3.5 h-3.5" />
+                  <span>
+                    {language === "en" ? "EN" : language === "zh" ? "中文" : "BN"}
+                  </span>
+                  <ChevronDown className="w-3 h-3 transition-transform duration-200" style={{ transform: langDropdownOpen ? "rotate(180deg)" : "none" }} />
+                </button>
+
+                {langDropdownOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setLangDropdownOpen(false)} />
+                    <div className="absolute right-0 mt-2 w-32 rounded-xl bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 shadow-xl py-1 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                      <button
+                        onClick={() => {
+                          setLanguage("en");
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
+                          language === "en" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
+                        }`}
+                      >
+                        <span>English (EN)</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setLanguage("zh");
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
+                          language === "zh" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
+                        }`}
+                      >
+                        <span>简体中文 (ZH)</span>
+                      </button>
+                      <button
+                        onClick={() => {
+                          setLanguage("bn");
+                          setLangDropdownOpen(false);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
+                          language === "bn" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
+                        }`}
+                      >
+                        <span>বাংলা (BN)</span>
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
 
               {/* Compare List */}
               <Link
@@ -253,8 +308,36 @@ export const Navbar: React.FC = () => {
             <hr className="border-zinc-200 dark:border-zinc-800" />
 
             <div className="flex items-center justify-between gap-4">
-             
-             
+              {/* Mobile Language Selector */}
+              <div className="flex items-center gap-2">
+                <Globe className="w-3.5 h-3.5 text-zinc-400" />
+                <div className="flex bg-zinc-100 dark:bg-zinc-900 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-800">
+                  <button
+                    onClick={() => setLanguage("en")}
+                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
+                      language === "en" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
+                    }`}
+                  >
+                    EN
+                  </button>
+                  <button
+                    onClick={() => setLanguage("zh")}
+                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
+                      language === "zh" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
+                    }`}
+                  >
+                    中文
+                  </button>
+                  <button
+                    onClick={() => setLanguage("bn")}
+                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
+                      language === "bn" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
+                    }`}
+                  >
+                    BN
+                  </button>
+                </div>
+              </div>
 
               <Link
                 href="/compare"

@@ -66,9 +66,25 @@ export const Chatbot: React.FC = () => {
         }
       }
 
+      // Special checks for Chinese phrases
+      if (!matched && language === "zh") {
+        if (normalizedQuery.includes("起订量") || normalizedQuery.includes("数量") || normalizedQuery.includes("moq")) {
+          replyText = "我们的标准最小起订量（MOQ）如下：搪胶玩具 500 件，PVC 公仔 1,000 件，毛绒玩具 1,200 件，STEM 教育套装 1,000 套。如有现成模具可支持小批量订单。";
+          matched = true;
+        } else if (normalizedQuery.includes("物流") || normalizedQuery.includes("海运") || normalizedQuery.includes("港口") || normalizedQuery.includes("出货")) {
+          replyText = "我们通过深圳港（盐田或蛇口）或广州港进行 FOB 出货。平均海运时间为：北美 18-22 天，西欧 25-32 天，日本 4-7 天。";
+          matched = true;
+        } else if (normalizedQuery.includes("定制") || normalizedQuery.includes("oem") || normalizedQuery.includes("odm")) {
+          replyText = "我们提供完整的 OEM（原始设备制造）服务！您只需提供 3D 图纸或简单的设计草图，我们即可进行 3D 原型制作、模具开发与大货生产。";
+          matched = true;
+        }
+      }
+
       if (!matched) {
         replyText = language === "en"
           ? "Thank you for your inquiry. Our B2B sales office is closed outside hours, but you can request samples by filling our inquiry basket or email sales@enstoys.com. What toy category are you planning to produce?"
+          : language === "zh"
+          ? "感谢您的咨询。我们B2B销售部门目前已下班，但您可以通过将产品加入询价篮并提交来申请样品，或者发送邮件至 sales@enstoys.com。您计划开发哪类玩具产品？"
           : "আপনার বার্তার জন্য ধন্যবাদ। আমাদের বিটুবি সেলস ম্যানেজার বর্তমানে অফলাইনে আছেন। আপনি যেকোনো কাস্টম খেলনার মূল্য জানতে ইনকোয়ারি বাস্কেটে প্রোডাক্ট যুক্ত করে রিকোয়েস্ট পাঠাতে পারেন অথবা sales@enstoys.com ইমেইল করতে পারেন।";
       }
 
@@ -174,7 +190,7 @@ export const Chatbot: React.FC = () => {
                   {msg.text}
                 </div>
                 <span className="text-[9px] text-zinc-400 mt-1 px-1">
-                  {msg.timestamp.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+                  {new Date(msg.timestamp).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </span>
               </div>
             ))}

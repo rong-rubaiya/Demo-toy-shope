@@ -12,12 +12,12 @@ export const FactoryGallery: React.FC = () => {
   const [lightboxImage, setLightboxImage] = useState<{ url: string; title: string } | null>(null);
 
   const filters = [
-    { id: "all", label: language === "en" ? "All Sectors" : "সব বিভাগ" },
-    { id: "tooling", label: language === "en" ? "Tooling Lab" : "ছাঁচ ল্যাব" },
-    { id: "molding", label: language === "en" ? "Injection Molding" : "ইনজেকশন ছাঁচ" },
-    { id: "painting", label: language === "en" ? "Painting Bay" : "পেইন্টিং বিভাগ" },
-    { id: "assembly", label: language === "en" ? "Cleanroom Assembly" : "অ্যাসেম্বলি জোন" },
-    { id: "qc", label: language === "en" ? "Quality Control" : "মান যাচাই" }
+    { id: "all", label: language === "en" ? "All Sectors" : language === "zh" ? "全部车间" : "সব বিভাগ" },
+    { id: "tooling", label: language === "en" ? "Tooling Lab" : language === "zh" ? "模具实验室" : "ছাঁচ ল্যাব" },
+    { id: "molding", label: language === "en" ? "Injection Molding" : language === "zh" ? "注塑成型" : "ইনজেকশন ছাঁচ" },
+    { id: "painting", label: language === "en" ? "Painting Bay" : language === "zh" ? "涂装喷漆" : "পেইন্টিং বিভাগ" },
+    { id: "assembly", label: language === "en" ? "Cleanroom Assembly" : language === "zh" ? "无尘组装" : "অ্যাসেম্বলি জোন" },
+    { id: "qc", label: language === "en" ? "Quality Control" : language === "zh" ? "质量控制" : "মান যাচাই" }
   ];
 
   const galleryItems = [
@@ -78,11 +78,13 @@ export const FactoryGallery: React.FC = () => {
             <span>Factory Tour Visuals</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-            {language === "en" ? "Inside Our Manufacturing Facilities" : "আমাদের উৎপাদন কারখানার অভ্যন্তরীণ দৃশ্য"}
+            {language === "en" ? "Inside Our Manufacturing Facilities" : language === "zh" ? "步入我们的制造车间" : "আমাদের উৎপাদন কারখানার অভ্যন্তরীণ দৃশ্য"}
           </h2>
           <p className="text-sm text-zinc-550 dark:text-zinc-400 font-medium leading-relaxed">
             {language === "en"
               ? "Take a look at our state-of-the-art facility in Huizhou. We hold regular client walkthrough audits and keep our zones strictly compliant with ethical standard programs."
+              : language === "zh"
+              ? "参观我们位于惠州的先进设施。我们定期接待客户实地审核，并严格确保所有区域符合道德标准认证规范。"
               : "হুইঝৌতে অবস্থিত আমাদের অত্যাধুনিক কারখানাটি ঘুরে দেখুন। আমরা নিয়মিত ক্লায়েন্ট অডিটের ব্যবস্থা করি এবং আমাদের সকল কার্যক্রম আন্তর্জাতিক নৈতিক মানদণ্ড অনুযায়ী পরিচালিত হয়।"}
           </p>
         </div>

@@ -70,7 +70,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-wider text-primary mb-3 block">Toy Taxonomy</span>
             <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-              {language === "en" ? "Diverse Product Categories" : "বিচিত্র খেলনা ক্যাটাগরি সমূহ"}
+              {language === "en" ? "Diverse Product Categories" : language === "zh" ? "丰富的玩具品类" : "বিচিত্র খেলনা ক্যাটাগরি সমূহ"}
             </h2>
             <p className="text-sm text-zinc-550 dark:text-zinc-400 font-medium leading-relaxed">
               We operate advanced injection, extrusion, rotocasting, and clean sewing lines. Explore our core custom capabilities.
@@ -112,7 +112,7 @@ export default function Home() {
             <div className="lg:col-span-7 space-y-6">
               <span className="text-xs font-bold uppercase tracking-wider text-primary block">Tailored Manufacturing</span>
               <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white leading-tight">
-                {language === "en" ? "Custom Toy Manufacturing (OEM & ODM)" : "কাস্টম খেলনা ম্যানুফ্যাকচারিং (OEM এবং ODM)"}
+                {language === "en" ? "Custom Toy Manufacturing (OEM & ODM)" : language === "zh" ? "定制玩具制造 (OEM & ODM)" : "কাস্টম খেলনা ম্যানুফ্যাকচারিং (OEM এবং ODM)"}
               </h2>
               <p className="text-sm sm:text-base text-zinc-650 dark:text-zinc-350 leading-relaxed font-medium">
                 Whether you possess fully modeled 3D assets or simple napkin concepts, our team provides full end-to-end support: 3D character sculpting, structural stress tests, injection tooling engineering, painting masks drafting, and regulatory laboratory safety submissions.
@@ -162,7 +162,7 @@ export default function Home() {
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-primary block mb-2">Curated Showroom</span>
               <h2 className="text-3xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white leading-tight">
-                {language === "en" ? "Explore Our B2B Showroom" : "আমাদের প্রোডাক্ট শোরুম দেখুন"}
+                {language === "en" ? "Explore Our B2B Showroom" : language === "zh" ? "参观我们的 B2B 展厅" : "আমাদের প্রোডাক্ট শোরুম দেখুন"}
               </h2>
             </div>
             
@@ -233,7 +233,7 @@ export default function Home() {
           <div className="text-center max-w-3xl mx-auto mb-16">
             <span className="text-xs font-bold uppercase tracking-wider text-primary mb-3 block">Recurring Shipments</span>
             <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-              {language === "en" ? "Interactive Subscription Box" : "ইন্টারেক্টিভ সাবস্ক্রিপশন বক্স"}
+              {language === "en" ? "Interactive Subscription Box" : language === "zh" ? "互动订阅盒" : "ইন্টারেক্টিভ সাবস্ক্রিপশন বক্স"}
             </h2>
             <p className="text-sm text-zinc-550 dark:text-zinc-400 font-medium leading-relaxed">
               We construct custom recurring blind boxes, action figures collections, or educational box bundles for direct drop-shipments or retailer bulk fulfillment.

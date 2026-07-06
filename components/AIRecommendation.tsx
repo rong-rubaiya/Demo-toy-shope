@@ -106,10 +106,14 @@ export const AIRecommendation: React.FC<AIRecommendationProps> = ({ onQuickView 
             <span>AI Procurement Insights</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-zinc-950 dark:text-white mb-4">
-            {language === "en" ? "AI Recommended Toy Suggestions" : "এআই টয় রিকমেন্ডেশন সিস্টেম"}
+            {language === "en" ? "AI Recommended Toy Suggestions" : language === "zh" ? "AI 推荐玩具方案" : "এআই টয় রিকমেন্ডেশন সিস্টেম"}
           </h2>
           <p className="text-sm text-zinc-555 dark:text-zinc-400 font-medium leading-relaxed">
-            Specify target audience parameters, per-unit FOB cost budgets, and toy categories to instantly query our production line matches.
+            {language === "en"
+              ? "Specify target audience parameters, per-unit FOB cost budgets, and toy categories to instantly query our production line matches."
+              : language === "zh"
+              ? "指定目标受众参数、单件 FOB 成本预算和玩具类别，即可立即查询我们的生产线配对产品。"
+              : "Specify target audience parameters, per-unit FOB cost budgets, and toy categories to instantly query our production line matches."}
           </p>
         </div>
 

@@ -23,11 +23,13 @@ export const ExportMap: React.FC = () => {
             <span>Global Export Footprint</span>
           </div>
           <h2 className="text-3xl md:text-4xl font-poppins font-black tracking-tight text-white mb-4">
-            {language === "en" ? "Ens Toys Global Distribution Network" : "এনস টয়স গ্লোবাল ডিস্ট্রিবিউশন নেটওয়ার্ক"}
+            {language === "en" ? "Ens Toys Global Distribution Network" : language === "zh" ? "恩斯玩具全球分销网络" : "এনস টয়স গ্লোবাল ডিস্ট্রিবিউশন নেটওয়ার্ক"}
           </h2>
           <p className="text-sm text-zinc-400 leading-relaxed font-medium">
             {language === "en"
               ? "We manufacture and export high-fidelity toys to over 100 countries. Our logistics pipeline integrates direct container shipping from Shenzhen Port with air and train forwarding."
+              : language === "zh"
+              ? "我们的玩具制造和出口覆盖全球100多个国家。我们的物流渠道整合了深圳港整柜直航以及航空和铁路货运服务。"
               : "আমরা ১০০টিরও বেশি দেশে উন্নতমানের খেলনা তৈরি ও রপ্তানি করি। শেনঝেন বন্দর থেকে সরাসরি লজিস্টিক পাইপলাইনের মাধ্যমে আমাদের শিপিং ব্যবস্থা পরিচালিত হয়।"}
           </p>
         </div>
@@ -113,10 +115,14 @@ export const ExportMap: React.FC = () => {
           {/* Statistics Info Panel */}
           <div className="lg:col-span-4 space-y-6">
             <h3 className="font-poppins font-extrabold text-xl text-white">
-              {language === "en" ? "Market Logistics Stats" : "মার্কেট লজিস্টিক পরিসংখ্যান"}
+              {language === "en" ? "Market Logistics Stats" : language === "zh" ? "市场物流统计" : "মার্কেট লজিস্টিক পরিসংখ্যান"}
             </h3>
             <p className="text-xs text-zinc-400 leading-relaxed font-medium">
-              Click on any map hub indicator to view localized annual volume, lead port logistics, and product categories.
+              {language === "en"
+                ? "Click on any map hub indicator to view localized annual volume, lead port logistics, and product categories."
+                : language === "zh"
+                ? "点击地图上的任意枢纽指标以查看本地化的年出货量、主要港口物流和产品类别。"
+                : "Click on any map hub indicator to view localized annual volume, lead port logistics, and product categories."}
             </p>
 
             <AnimatePresence mode="wait">

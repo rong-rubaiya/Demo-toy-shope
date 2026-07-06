@@ -2,6 +2,8 @@ export const translations = {
   en: {
     nav: {
       products: "Products",
+      home: "Home",
+      chat: "Live Chat",
       about: "About Us",
       whyUs: "Why Choose Us",
       factory: "Factory",
@@ -17,6 +19,15 @@ export const translations = {
       inquiry: "Inquiry Basket",
       wishlist: "Wishlist",
       compare: "Compare"
+    },
+    chat: {
+      title: "Buyer-Seller Chat",
+      subtitle: "Talk directly with your sales rep and request pricing, MOQ, or sample details.",
+      welcome: "Hello! This is a direct buyer-seller chat. Share your order details and our team will reply shortly.",
+      placeholder: "Ask the seller about pricing, MOQ, shipping, or custom options...",
+      sendButton: "Send",
+      sellerLabel: "Seller Team",
+      empty: "Start a conversation with your assigned seller."
     },
     hero: {
       tagline: "TRUSTED B2B TOY MANUFACTURING PARTNER",
@@ -95,6 +106,8 @@ export const translations = {
   bn: {
     nav: {
       products: "পণ্যসমূহ",
+      home: "হোম",
+      chat: "লাইভ চ্যাট",
       about: "আমাদের সম্পর্কে",
       whyUs: "আমাদের সুবিধা",
       factory: "কারখানা",
@@ -110,6 +123,15 @@ export const translations = {
       inquiry: "ইনকোয়ারি বাস্কেট",
       wishlist: "পছন্দের তালিকা",
       compare: "তুলনা করুন"
+    },
+    chat: {
+      title: "বায়ার-সেলার চ্যাট",
+      subtitle: "আপনার সেলস রেপের সঙ্গে সরাসরি কথা বলুন এবং মূল্য, MOQ বা নমুনা সম্পর্কে জিজ্ঞাসা করুন।",
+      welcome: "হ্যালো! এটি সরাসরি বায়ার-সেলার চ্যাট। আপনার অর্ডারের বিবরণ শেয়ার করুন এবং আমাদের দল শীঘ্রই উত্তর দেবে।",
+      placeholder: "মূল্য, MOQ, শিপিং বা কাস্টম অপশন সম্পর্কে বিক্রেতাকে জিজ্ঞাসা করুন...",
+      sendButton: "পাঠান",
+      sellerLabel: "সেলার টিম",
+      empty: "আপনার বরাদ্দকৃত বিক্রেতার সাথে কথোপকথন শুরু করুন।"
     },
     hero: {
       tagline: "নির্ভরযোগ্য বিটুবি খেলনা প্রস্তুতকারক অংশীদার",
@@ -183,6 +205,109 @@ export const translations = {
       hoursVal: "সোম - শনি: সকাল ৯:০০ - সন্ধ্যা ৬:০০ (GMT+8)",
       address: "কারখানার ঠিকানা",
       addressVal: "নং ১২, শেংফেং ইন্ডাস্ট্রিয়াল পার্ক, হুইঝৌ সিটি, গুয়াংডং প্রদেশ, চীন"
+    }
+  },
+  zh: {
+    nav: {
+      products: "产品列表",
+      home: "首页",
+      chat: "在线客服",
+      about: "关于我们",
+      whyUs: "选择我们",
+      factory: "工厂介绍",
+      process: "生产工艺",
+      exportMap: "全球网络",
+      gallery: "工厂图集",
+      faq: "常见问题",
+      contact: "联系销售",
+      dashboard: "控制面板",
+      admin: "管理员",
+      login: "登录 / 注册",
+      inquiry: "询价篮",
+      wishlist: "心愿单",
+      compare: "对比列表"
+    },
+    chat: {
+      title: "买家与卖家聊天",
+      subtitle: "直接与您的销售代表沟通，咨询价格、最小起订量（MOQ）或样品详情。",
+      welcome: "您好！这是买家与卖家的直连通道。请分享您的订单需求，我们的团队会尽快回复您。",
+      placeholder: "向卖家询问价格、起订量、物流或定制方案...",
+      sendButton: "发送",
+      sellerLabel: "卖家团队",
+      empty: "开始与您的专属销售进行沟通。"
+    },
+    hero: {
+      tagline: "值得信赖的 B2B 玩具制造合作伙伴",
+      headline: "以卓越品质将玩具概念转化为现实",
+      subheadline: "恩斯玩具是一家国际化的 OEM/ODM 制造商，专注于高保真 PVC 手办、搪胶艺术玩具、动作玩偶、毛绒玩具以及 STEM 套装。",
+      ctaExplore: "探索产品",
+      ctaContact: "联系销售",
+      ctaWatch: "观看工厂视频"
+    },
+    about: {
+      title: "自 2006 年起专注精细玩具制造",
+      desc1: "20多年来，恩斯玩具（惠州）有限公司在中国惠州的先进设施中提供世界一流的工程、注塑成型、搪胶工艺、手工上色和自动化组装服务。",
+      desc2: "我们与领先的娱乐品牌、独立艺术家工作室和全球玩具公司合作，生产符合安全认证的高端收藏品和教育产品。",
+      statYears: "年制造经验",
+      statEmployees: "在职员工",
+      statFactory: "工厂面积",
+      statCountries: "出口国家",
+      statProducts: "产品款式"
+    },
+    whyUs: {
+      title: "为什么全球品牌选择恩斯玩具",
+      subtitle: "我们对合规制造、严格品质控制和先进产品设计的承诺使我们脱颖而出。",
+      card1Title: "高端 3D 原型制作",
+      card1Desc: "我们的内部设计团队能在几天内将草图转化为高精度 STL 文件和实体原型样品。",
+      card2Title: "严格的合规性",
+      card2Desc: "所有材料均无毒、无铅，并符合 EN71、ASTM、CPSIA 和 CE 等全球安全标准。",
+      card3Title: "灵活的最小起订量 (MOQ)",
+      card3Desc: "我们支持初创设计师玩具品牌，搪胶玩具起订量仅需 500 件起。",
+      card4Title: "端到端物流支持",
+      card4Desc: "从定制零售展示盒到整柜海运和 DDP（完税后交货），我们全程协助物流。"
+    },
+    timeline: {
+      title: "我们的制造流程",
+      subtitle: "展示从最初的概念蓝图到全球出货港口的高端玩具制造全流程。",
+      step1: "设计与蓝图制定",
+      step1Desc: "评估客户提供的参考图或手稿，规划结构关节 and 涂装规范。",
+      step2: "3D 数码雕刻与原型制作",
+      step2Desc: "进行角色数码建模，测试关节可动性，并输出高精度 SLS/SLA 3D 打印样品。",
+      step3: "钢模加工与模具制造",
+      step3Desc: "精密铜电铸和钢模加工，完美复制每一个细节。",
+      step4: "注塑成型与搪胶",
+      step4Desc: "在严格的温度和周期审计下，进行大批量原材料塑料加工。",
+      step5: "手工上色与喷漆细节",
+      step5Desc: "精密定制上色遮罩、气笔喷漆、移印和细部贴纸处理。",
+      step6: "无尘室组装",
+      step6Desc: "在无尘区内进行关节组装、配件包装和超声波焊接。",
+      step7: "质量检验 (QC)",
+      step7Desc: "多点检查喷漆一致性、结构强度并进行跌落测试。",
+      step8: "零售包装与封箱",
+      step8Desc: "将玩具安全固定在定制吸塑盒内，并装入彩色开窗礼品纸盒。",
+      step9: "全球物流与海运",
+      step9Desc: "在深圳港（盐田或蛇口）装箱（整柜/拼柜）并分发给全球买家。"
+    },
+    chatbot: {
+      title: "恩斯玩具销售助理",
+      welcome: "您好！我是恩斯玩具的虚拟助手。今天有什么关于玩具制造的问题我可以帮您解答吗？",
+      placeholder: "咨询关于起订量、物流、OEM、ODM...",
+      chips: ["起订量信息", "出货港口及船期", "OEM & ODM 定制服务", "安全认证证书", "平均生产周期", "价格表信息"]
+    },
+    contact: {
+      title: "开始您的定制玩具项目",
+      subtitle: "联系我们的 B2B 销售团队，获取定制报价、样品包或工厂审核行程安排。",
+      name: "您的姓名",
+      email: "商业邮箱",
+      msg: "项目详情 / 数量 / 设计规格要求",
+      submit: "提交申请",
+      success: "非常感谢！您的请求已收到。我们的销售工程师将在 24 小时内回复您。",
+      infoTitle: "销售总部",
+      phone: "电话 / WhatsApp",
+      hours: "营业时间",
+      hoursVal: "周一至周六: 上午 9:00 - 下午 6:00 (GMT+8)",
+      address: "工厂地址",
+      addressVal: "中国广东省惠州市盛丰工业园12号"
     }
   }
 };
