@@ -59,7 +59,7 @@ export const Navbar: React.FC = () => {
     setProfileDropdownOpen(false);
   }, [pathname]);
 
- 
+
 
   const navItems = [
     { name: t.nav.home, path: "/" },
@@ -74,11 +74,10 @@ export const Navbar: React.FC = () => {
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${
-          scrolled
-            ? "glass py-3 shadow-md bg-white/80 dark:bg-dark/80"
-            : "bg-transparent py-5"
-        }`}
+        className={`fixed top-0 left-0 w-full z-40 transition-all duration-300 ${scrolled
+          ? "glass py-3 shadow-md bg-white/80 dark:bg-dark/80"
+          : "bg-transparent py-5"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
@@ -120,7 +119,7 @@ export const Navbar: React.FC = () => {
                 >
                   <Globe className="w-3.5 h-3.5" />
                   <span>
-                    {language === "en" ? "EN" : language === "zh" ? "中文" : "BN"}
+                    {language === "en" ? "EN" : "中文"}
                   </span>
                   <ChevronDown className="w-3 h-3 transition-transform duration-200" style={{ transform: langDropdownOpen ? "rotate(180deg)" : "none" }} />
                 </button>
@@ -134,9 +133,8 @@ export const Navbar: React.FC = () => {
                           setLanguage("en");
                           setLangDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
-                          language === "en" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
-                        }`}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${language === "en" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
+                          }`}
                       >
                         <span>English (EN)</span>
                       </button>
@@ -145,22 +143,10 @@ export const Navbar: React.FC = () => {
                           setLanguage("zh");
                           setLangDropdownOpen(false);
                         }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
-                          language === "zh" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
-                        }`}
+                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${language === "zh" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
+                          }`}
                       >
                         <span>简体中文 (ZH)</span>
-                      </button>
-                      <button
-                        onClick={() => {
-                          setLanguage("bn");
-                          setLangDropdownOpen(false);
-                        }}
-                        className={`w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold hover:bg-zinc-50 dark:hover:bg-zinc-900 transition text-left ${
-                          language === "bn" ? "text-primary bg-primary/5" : "text-zinc-700 dark:text-zinc-300"
-                        }`}
-                      >
-                        <span>বাংলা (BN)</span>
                       </button>
                     </div>
                   </>
@@ -292,7 +278,7 @@ export const Navbar: React.FC = () => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="md:hidden glass bg-white/95 dark:bg-dark/95 border-b border-zinc-200 dark:border-zinc-800 py-4 px-4 space-y-4">
+          <div className="md:hidden  bg-white/95 dark:bg-dark/95 border-b border-zinc-200 dark:border-zinc-800 py-4 px-4 space-y-4">
             <div className="flex flex-col gap-3.5">
               {navItems.map((item) => (
                 <Link
@@ -314,27 +300,17 @@ export const Navbar: React.FC = () => {
                 <div className="flex bg-zinc-100 dark:bg-zinc-900 rounded-lg p-0.5 border border-zinc-200 dark:border-zinc-800">
                   <button
                     onClick={() => setLanguage("en")}
-                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
-                      language === "en" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
-                    }`}
+                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${language === "en" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
+                      }`}
                   >
                     EN
                   </button>
                   <button
                     onClick={() => setLanguage("zh")}
-                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
-                      language === "zh" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
-                    }`}
+                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${language === "zh" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
+                      }`}
                   >
                     中文
-                  </button>
-                  <button
-                    onClick={() => setLanguage("bn")}
-                    className={`px-2 py-1 text-[10px] font-bold rounded-md transition cursor-pointer ${
-                      language === "bn" ? "bg-white dark:bg-zinc-800 text-primary shadow-xs" : "text-zinc-500 dark:text-zinc-400 hover:text-zinc-800"
-                    }`}
-                  >
-                    BN
                   </button>
                 </div>
               </div>

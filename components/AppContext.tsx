@@ -5,8 +5,8 @@ import { Product, InquiryItem, GiftBoxOrder, Subscription, User, Inquiry, Review
 import { products as initialProducts, subscriptionPlans as initialSubscriptions } from "@/data/mockData";
 
 interface AppContextType {
-  language: "en" | "bn" | "zh";
-  setLanguage: (lang: "en" | "bn" | "zh") => void;
+  language: "en" | "zh";
+  setLanguage: (lang: "en" | "zh") => void;
   wishlist: string[];
   toggleWishlist: (id: string) => void;
   inquiryBasket: InquiryItem[];
@@ -42,7 +42,7 @@ interface AppContextType {
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
 export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguageState] = useState<"en" | "bn" | "zh">("en");
+  const [language, setLanguageState] = useState<"en" | "zh">("en");
   const [wishlist, setWishlist] = useState<string[]>([]);
   const [inquiryBasket, setInquiryBasket] = useState<InquiryItem[]>([]);
   const [recentlyViewed, setRecentlyViewed] = useState<string[]>([]);
@@ -58,8 +58,10 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   // Load from local storage on mount
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const storedLang = localStorage.getItem("ens_language") as "en" | "bn" | "zh";
-      if (storedLang) setLanguageState(storedLang);
+      const storedLang = localStorage.getItem("ens_language");
+      if (storedLang === "en" || storedLang === "zh") {
+        setLanguageState(storedLang);
+      }
 
       const storedWishlist = localStorage.getItem("ens_wishlist");
       if (storedWishlist) setWishlist(JSON.parse(storedWishlist));
@@ -112,7 +114,7 @@ export const AppProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     }
   }, []);
 
-  const setLanguage = (lang: "en" | "bn" | "zh") => {
+  const setLanguage = (lang: "en" | "zh") => {
     setLanguageState(lang);
     localStorage.setItem("ens_language", lang);
   };

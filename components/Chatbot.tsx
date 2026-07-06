@@ -52,20 +52,6 @@ export const Chatbot: React.FC = () => {
         }
       }
 
-      // Special checks for Bangla phrases (approximate translation responses)
-      if (!matched && language === "bn") {
-        if (normalizedQuery.includes("অর্ডার") || normalizedQuery.includes("পরিমাণ") || normalizedQuery.includes("moq")) {
-          replyText = chatBotKeywords.moq;
-          matched = true;
-        } else if (normalizedQuery.includes("শিপিং") || normalizedQuery.includes("জাহাজ")) {
-          replyText = chatBotKeywords.shipping;
-          matched = true;
-        } else if (normalizedQuery.includes("কাস্টম") || normalizedQuery.includes("তৈরি")) {
-          replyText = chatBotKeywords.oem;
-          matched = true;
-        }
-      }
-
       // Special checks for Chinese phrases
       if (!matched && language === "zh") {
         if (normalizedQuery.includes("起订量") || normalizedQuery.includes("数量") || normalizedQuery.includes("moq")) {
@@ -83,9 +69,7 @@ export const Chatbot: React.FC = () => {
       if (!matched) {
         replyText = language === "en"
           ? "Thank you for your inquiry. Our B2B sales office is closed outside hours, but you can request samples by filling our inquiry basket or email sales@enstoys.com. What toy category are you planning to produce?"
-          : language === "zh"
-          ? "感谢您的咨询。我们B2B销售部门目前已下班，但您可以通过将产品加入询价篮并提交来申请样品，或者发送邮件至 sales@enstoys.com。您计划开发哪类玩具产品？"
-          : "আপনার বার্তার জন্য ধন্যবাদ। আমাদের বিটুবি সেলস ম্যানেজার বর্তমানে অফলাইনে আছেন। আপনি যেকোনো কাস্টম খেলনার মূল্য জানতে ইনকোয়ারি বাস্কেটে প্রোডাক্ট যুক্ত করে রিকোয়েস্ট পাঠাতে পারেন অথবা sales@enstoys.com ইমেইল করতে পারেন।";
+          : "感谢您的咨询。我们B2B销售部门目前已下班，但您可以通过将产品加入询价篮并提交来申请样品，或者发送邮件至 sales@enstoys.com。您计划开发哪类玩具产品？";
       }
 
       const newMsg: ChatMessage = {
